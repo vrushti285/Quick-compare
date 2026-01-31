@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuickCompare | Premium Access</title>
+
+<style>
+:root {
+    --primary: #5a67ff;
+    --dark: #1a1b25;
+    --text-main: #2d3436;
+    --text-light: #636e72;
+    --white: #ffffff;
+    --bg-grad: linear-gradient(135deg, #f8f9fd 0%, #e2e8f0 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+body {
+    background: var(--bg-grad);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand { font-size: 24px; font-weight: 800; }
+
+.header-btn {
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+    padding: 10px 24px;
+    border-radius: 10px;
+    background: transparent;
+    cursor: pointer;
+}
+.header-btn:hover { background: var(--primary); color: white; }
+
+.auth-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.auth-card {
+    width: 1000px;
+    display: flex;
+    border-radius: 24px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+}
+
+.auth-info {
+    flex: 1;
+    background: var(--dark);
+    color: white;
+    padding: 60px;
+}
+.auth-info h1 { font-size: 42px; margin-bottom: 20px; }
+
+.auth-form-area {
+    flex: 1.2;
+    padding: 60px;
+}
+
+.form-group { margin-bottom: 20px; position: relative; }
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1.5px solid #e2e8f0;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="brand">QuickCompare</div>
+    <button class="header-btn" id="toggleLink" onclick="toggleView()">Create Account</button>
+</header>
+
+<main class="auth-wrapper">
+<div class="auth-card">
+
+    <div class="auth-info">
+        <h1>Save Smart.<br>Shop Faster.</h1>
+        <p>Compare prices across all major quick-commerce platforms.</p>
+    </div>
+
+    <div class="auth-form-area">
+
+        <!-- LOGIN -->
+        <div id="loginBlock">
+            <h2>Welcome Back</h2>
+            <div class="form-group">
+                <input type="text" id="loginUser" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input type="password" id="loginPass" placeholder="Password">
+                <span class="password-toggle" onclick="togglePass('loginPass')">👁</span>
+            </div>
+            <button class="submit-btn" onclick="validateLogin()">Sign In</button>
+        </div>
+
+        <!-- SIGNUP -->
+        <div id="signupBlock" style="display:none;">
+            <h2>Get Started</h2>
+
+            <div class="input-row">
+                <div class="form-group">
+                    <input type="text" id="fname" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" id="lname" placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="signupUser" placeholder="Username">
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="city" placeholder="City">
+            </div>
+
+            <div class="form-group">
+                <input type="password" id="signupPass" placeholder="Password">
+                <span class="password-toggle" onclick="togglePass('signupPass')">👁</span>
+            </div>
+
+            <button class="submit-btn" onclick="validateSignup()">Create Account</button>
+        </div>
+
+    </div>
+</div>
+</main>
+
+<script>
+/* TOGGLE LOGIN / SIGNUP */
+function toggleView() {
+    const login = document.getElementById("loginBlock");
+    const signup = document.getElementById("signupBlock");
+    const btn = document.getElementById("toggleLink");
+
+    if (login.style.display === "none") {
+        login.style.display = "block";
+        signup.style.display = "none";
+        btn.innerText = "Create Account";
+    } else {
+        login.style.display = "none";
+        signup.style.display = "block";
+        btn.innerText = "Login Instead";
+    }
+}
+
+/* PASSWORD TOGGLE */
+function togglePass(id) {
+    const input = document.getElementById(id);
+    input.type = input.type === "password" ? "text" : "password";
+}
+
+/* LOGIN VALIDATION */
+function validateLogin() {
+    const user = document.getElementById("loginUser").value.trim();
+    const pass = document.getElementById("loginPass").value.trim();
+
+    if (user === "") {
+        alert("Username is required");
+        return;
+    }
+    if (pass.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+    }
+
+    alert("Login successful!");
+    window.location.href = "home.html";
+}
+
+/* SIGNUP VALIDATION */
+function validateSignup() {
+    const fname = document.getElementById("fname").value.trim();
+    const lname = document.getElementById("lname").value.trim();
+    const user = document.getElementById("signupUser").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const pass = document.getElementById("signupPass").value.trim();
+
+    if (!fname || !lname) {
+        alert("First & Last name required");
+        return;
+    }
+    if (user.length < 4) {
+        alert("Username must be at least 4 characters");
+        return;
+    }
+    if (!city) {
+        alert("City is required");
+        return;
+    }
+    if (pass.length < 6) {
+        alert("Password must be at least 6 characters");
+        return;
+    }
+
+    alert("Account created successfully!");
+    window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>

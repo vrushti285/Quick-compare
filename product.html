@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>QuickCompare | Product Details</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+/* Page Background */
+.product-body {
+    background: #f6f8fc;
+    font-family: "Inter", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.top-nav {
+    background: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Back button */
+.back-link {
+    cursor: pointer;
+    font-size: 16px;
+    color: #374151;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.back-link:hover {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+/* ===== PRODUCT SECTION ===== */
+.product-detail-section {
+    display: flex;
+    gap: 40px;
+    padding: 60px 10%;
+    align-items: flex-start;
+}
+
+/* Product image box */
+.product-image-box img {
+    width: 330px;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    background: white;
+    padding: 12px;
+}
+
+/* Product info text */
+.product-info-box {
+    max-width: 550px;
+}
+
+.product-info-box h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 800;
+    color: #1f2937;
+}
+
+.product-desc {
+    color: #4b5563;
+    font-size: 16px;
+    margin-bottom: 22px;
+}
+
+/* Info Boxes */
+.info-box {
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.info-box h4 {
+    margin-bottom: 6px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.info-box p {
+    font-size: 15px;
+    color: #4b5563;
+}
+
+/* ===== PRICE TABLE ===== */
+.comparison-section {
+    margin: 40px 10%;
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.comparison-section h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #1f2937;
+    font-weight: 700;
+}
+
+.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.compare-table th,
+.compare-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 15px;
+}
+
+.compare-table th {
+    background: #f9fafb;
+    font-weight: 700;
+}
+
+.lowest-badge {
+    background: #10b981;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+/* ===== BUY BUTTONS ===== */
+.platform-buy-buttons {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.buy-btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+    color: white;
+}
+
+.buy-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.05);
+}
+
+.buy-zepto { background: #5a189a; }
+.buy-blinkit { background: #ffc300; color: black; }
+.buy-instamart { background: #ff5200; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .product-detail-section {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .product-info-box {
+        max-width: 100%;
+    }
+
+    .product-image-box img {
+        width: 260px;
+    }
+
+    .comparison-section {
+        margin: 20px;
+        padding: 25px;
+    }
+}
+</style>
+
+</head>
+
+<body class="product-body">
+
+<header class="top-nav">
+    <div class="nav-left">
+        <h2 class="logo">QuickCompare</h2>
+        <span class="back-link" onclick="goBack()">← Back</span>
+    </div>
+
+    <div class="nav-right">
+        <a href="cart.html" class="nav-btn nav-btn-outline">Cart</a>
+    </div>
+</header>
+
+<!-- PRODUCT DETAILS -->
+<section class="product-detail-section">
+
+    <div class="product-image-box">
+        <!-- Static image, JS will NOT touch this -->
+        <img src="images/water.png" alt="Product Image">
+    </div>
+
+    <div class="product-info-box">
+        <h2 id="productName"></h2>
+        <p id="productDescription" class="product-desc"></p>
+
+        <div class="info-box">
+            <h4>Ingredients</h4>
+            <p id="productIngredients"></p>
+        </div>
+
+        <div class="info-box">
+            <h4>Food Type</h4>
+            <p id="productVeg"></p>
+        </div>
+    </div>
+
+</section>
+
+<!-- PRICE COMPARISON -->
+<section class="comparison-section">
+
+    <h3>Price Comparison Across Platforms</h3>
+
+    <table class="compare-table">
+        <tr>
+            <th>Platform</th>
+            <th>Price</th>
+        </tr>
+
+        <tr>
+            <td>
+                Zepto
+                <span id="zeptoBadge" class="lowest-badge">Lowest Price</span>
+            </td>
+            <td id="zeptoPrice"></td>
+        </tr>
+
+        <tr>
+            <td>Blinkit</td>
+            <td id="blinkitPrice"></td>
+        </tr>
+
+        <tr>
+            <td>Instamart</td>
+            <td id="instamartPrice"></td>
+        </tr>
+    </table>
+
+    <div class="platform-buy-buttons">
+        <button class="buy-btn buy-zepto" onclick="addToCart('Zepto')">Buy on Zepto</button>
+        <button class="buy-btn buy-blinkit" onclick="addToCart('Blinkit')">Buy on Blinkit</button>
+        <button class="buy-btn buy-instamart" onclick="addToCart('Instamart')">Buy on Instamart</button>
+    </div>
+
+</section>
+
+<!-- <script>
+function goBack() {
+    if (window.history.length > 1) {
+        window.history.back();
+    } else {
+        window.location.href = "home.html";
+    }
+}
+</script> -->
+
+<script src="js/script.js"></script>
+</body>
+</html>

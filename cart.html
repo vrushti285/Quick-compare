@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCompare | Your Cart</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .cart-body { background-color: #f8f9fd; }
+
+        .cart-section {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .cart-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .item-platform {
+            font-size: 13px;
+            color: #636e72;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-controls button {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .qty-controls button:hover {
+            background: #f0f2f5;
+        }
+
+        .bill-summary {
+            background: white;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #636e72;
+        }
+
+        .bill-row.total {
+            color: #1a1b25;
+            font-size: 20px;
+            font-weight: 800;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .pay-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            background: #5a67ff;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pay-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(90,103,255,0.3);
+        }
+    </style>
+</head>
+
+<body class="cart-body">
+
+<header class="top-nav">
+    <div class="nav-left">
+        <span class="back-link" onclick="history.back()" style="font-size:24px; cursor:pointer;">←</span>
+        <h2 class="logo" style="margin-left:15px;">QuickCompare</h2>
+    </div>
+</header>
+
+<section class="cart-section">
+
+    <div class="cart-header">
+        <h3>Shopping Summary</h3>
+    </div>
+
+    <!-- EMPTY CART -->
+    <div id="emptyCart" style="display:none; text-align:center; padding:60px 20px; background:white; border-radius:16px;">
+        <h4 style="font-size:22px;">Your cart is empty</h4>
+        <p style="color:#636e72; margin:10px 0 25px;">
+            Add items to compare prices and save more.
+        </p>
+        <a href="home.html" class="nav-btn">Start Shopping</a>
+    </div>
+
+    <!-- CART ITEMS -->
+    <div id="cartItems" class="cart-items">
+        <!-- Items injected by JS -->
+        <!-- Example structure:
+        <div class="cart-item">
+            <div class="item-info">
+                <strong>Milk Packet</strong>
+                <span class="item-platform">Platform: Zepto</span>
+            </div>
+            <div class="qty-controls">
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+            </div>
+            <strong>₹25</strong>
+        </div>
+        -->
+    </div>
+
+    <!-- BILL SUMMARY -->
+    <div class="bill-summary">
+        <h4 style="margin-bottom:20px;">Order Details</h4>
+
+        <div class="bill-row">
+            <span>Items Subtotal</span>
+            <span id="subtotal">₹0</span>
+        </div>
+
+        <div class="bill-row">
+            <span>Delivery Fee</span>
+            <span>₹15</span>
+        </div>
+
+        <div class="bill-row">
+            <span>Service & Handling</span>
+            <span>₹5</span>
+        </div>
+
+        <div class="bill-row">
+            <span>Tax (5%)</span>
+            <span id="tax">₹0</span>
+        </div>
+
+        <div class="bill-row total">
+            <span>Amount Payable</span>
+            <span id="total">₹0</span>
+        </div>
+
+        <button class="pay-btn">Proceed to Pay</button>
+    </div>
+
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>
